@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import Rating from '@mui/material/Rating';
+
+
 export default function ImgMediaCard({item}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -25,12 +28,21 @@ export default function ImgMediaCard({item}) {
         </Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-         {item.price}
+        <p className="card-price">${item.price}</p>
+        
+       
         </Typography>
+
+
+         
       </CardContent>
       <CardActions>
-        <Button size="small">add to cart</Button>
+      <Button variant="contained">Add to cart</Button>
        
+      <Rating name="read-only" value={item.rating.rate} readOnly />
+      <Typography component="legend">  ({item.rating.count})</Typography>
+    
+
       </CardActions>
     </Card>
   );

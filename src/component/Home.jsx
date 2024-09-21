@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Card } from '@mui/material';
 import Cardd from './Card'
 import './Home.css'
+import {Box} from '@mui/material';
 
 function Home() {
 
@@ -19,7 +20,7 @@ function Home() {
    )
 
 
-   const  fetchData = async ()=>{
+   const  fetchData = async ()=>{             
     try {
         const responce= await axios.get("https://fakestoreapi.com/products")
         setproduct(responce.data)
@@ -35,12 +36,23 @@ function Home() {
    
 
   return (
-    <div  className='containers'>
+
+    <Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 2,
+        padding: 2,
+      }}
+    >
+    <div  className='containers' >
      {product&& product.map((item)=>(
        <Cardd   item ={item}/>
      
      ) )}
     </div>
+    </Box>
   )
 }
 
