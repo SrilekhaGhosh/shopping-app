@@ -7,9 +7,20 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import Rating from '@mui/material/Rating';
+import { useDispatch } from 'react-redux';
+import { addTocart } from '../Features/AddcartSlice';
 
 
 export default function ImgMediaCard({item}) {
+
+  const dispatch = useDispatch();
+
+
+ const handleAddToCart =() =>{
+  dispatch(addTocart(item))
+ }
+
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -28,7 +39,7 @@ export default function ImgMediaCard({item}) {
         </Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        <p className="card-price">${item.price}</p>
+        <p className="card-price">₹{item.price}</p>
         
        
         </Typography>
@@ -37,7 +48,7 @@ export default function ImgMediaCard({item}) {
          
       </CardContent>
       <CardActions>
-      <Button variant="contained">Add to cart</Button>
+      <Button onClick={handleAddToCart} variant="contained">Add to cart</Button>
        
       <Rating name="read-only" value={item.rating.rate} readOnly />
       <Typography component="legend">  ({item.rating.count})</Typography>

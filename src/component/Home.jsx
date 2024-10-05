@@ -6,9 +6,17 @@ import Cardd from './Card'
 import './Home.css'
 import {Box} from '@mui/material';
 
+import {useDispatch} from 'react-redux'
+import { useSelector } from 'react-redux';
+
+
 function Home() {
 
    const[product,setproduct] =useState([])
+
+   const dispatch = useDispatch();
+   const cart=useSelector((state) => state.cart);
+   console.log(cart.cartItem)
 
 
 
@@ -36,6 +44,7 @@ function Home() {
    
 
   return (
+  
 
     <Box
       sx={{
@@ -48,11 +57,16 @@ function Home() {
     >
     <div  className='containers' >
      {product&& product.map((item)=>(
-       <Cardd   item ={item}/>
+       <Cardd key={item.id}  item ={item}/>
      
      ) )}
+
+     
     </div>
+    
     </Box>
+
+
   )
 }
 
