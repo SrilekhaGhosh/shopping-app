@@ -8,8 +8,8 @@ const Cart = () => {
   //const totalAmount = useSelector((state) => state.cart.totalPrice);
   const dispatch = useDispatch();
 
-  const handleRemoveFromCart = (item) => {
-    dispatch(removeFromCart(item));
+  const handleRemoveFromCart = (id) => {
+    dispatch(removeFromCart(id));
   };
 
   return (
@@ -31,7 +31,7 @@ const Cart = () => {
                 <Typography variant="h6">{item.title}</Typography>
                 <Typography variant="body2">Quantity: {item.quantity}</Typography>
                
-                <Typography variant="body2">Price: ${item.price}</Typography>
+                 <Typography variant="body2">Price: ${item.price}</Typography>
               </Box>
               <Box>
                 <Button
