@@ -4,7 +4,7 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState={   
     cartItem:[],
-
+    
        
     
 
@@ -27,7 +27,7 @@ export const AddcartSlice= createSlice({
                     title: newItem.title,
                     price:  newItem.price,
                     image:  newItem.image, // Add image property
-                    quantity: 1,
+                    quantity: 1,            
                     totalPrice: newItem.price,
                   });
                   state.totalQuantity++;

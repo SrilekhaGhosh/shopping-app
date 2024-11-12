@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, Button, Card, Grid ,  Avatar,} from '@mui/material';
 import { removeFromCart } from '../Features/AddcartSlice' // Redux action
+import { useEffect } from 'react';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItem);
@@ -11,6 +12,12 @@ const Cart = () => {
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
+
+
+  
+useEffect(()=>{
+  removeFromCart()
+},[id])
 
   return (
     <Box p={3}>

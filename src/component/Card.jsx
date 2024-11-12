@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import { useDispatch } from 'react-redux';
 import { addTocart } from '../Features/AddcartSlice';
+import { useEffect } from 'react';
 
 
 export default function ImgMediaCard({item}) {
@@ -19,6 +20,8 @@ export default function ImgMediaCard({item}) {
  const handleAddToCart =() =>{
   dispatch(addTocart(item))
  }
+
+
 
 
   return (

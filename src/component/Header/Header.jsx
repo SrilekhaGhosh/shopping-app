@@ -28,7 +28,7 @@ export default function Header() {
                                     Home
                                 </NavLink>
                             </li>
-                          
+                            
                             <li>
                                 <NavLink
                                 to="/cart"
