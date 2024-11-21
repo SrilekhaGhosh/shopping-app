@@ -21,9 +21,9 @@ export const AddcartSlice= createSlice({
         addTocart: (state, action) => {
             const itemInCart = state.cartItem.find(item=>item.id==action.payload.id);
             const newItem = action.payload;
-             if(itemInCart){
-                state.items.push({
-                    id:cartItem.id,
+             if(!itemInCart){
+                state.cartItem.push({
+                    id:newItem.id,
                     title: newItem.title,
                     price:  newItem.price,
                     image:  newItem.image, // Add image property
@@ -34,8 +34,9 @@ export const AddcartSlice= createSlice({
 
              }
              else{
-                itemInCart.quantity++;
+                
                 itemInCart.totalPrice += newItem.price;
+                itemInCart.quantity += newItem.quantity;
              }  
          
              state.totalPrice += newItem.price;
@@ -44,21 +45,39 @@ export const AddcartSlice= createSlice({
 
             removeFromCart: (state,action)=>{
                 const id = action.payload;
-                const existingItem = state.items.find(item => item.id === id);
+                const existingItem = state.cartItem.find(item => item.id === id);
                 if (existingItem) {
                   state.totalQuantity--;
-                  state.totalPrice -= existingItem.price * existingItem.quantity;
-                  state.items = state.items.filter(item => item.id !== id);
+                  state.totalPrice -= existingItem.price * existingItem.quantity ;
+                   state.cartItem = state.cartItem.filter(item => item.id !== id);
                 }
 
             },
 
-            clearCart :(state)=>{
+             clearCart :(state)=>{
                 state.cartItem =[];
-            }
+                state.totalQuantity = 0;
+                state.totalPrice = 0;
+             },
+
+             updateQuantity(state, action) {
+                const { id, quantity } = action.payload;
+                const existingItem = state.cartItem.find(item => item.id === id);
+                if (existingItem) {
+                  state.totalQuantity += quantity - existingItem.quantity;
+                  state.totalPrice += (quantity - existingItem.quantity) * existingItem.price;
+                  existingItem.quantity = quantity;
+                  existingItem.totalPrice = existingItem.price * quantity;
+                }
+              },
+
+              setDeliveryDate: (state, action) => {
+                state.deliveryDate = action.payload; // Update deliveryDate in the store
+              }
+             
         }
         })
 
-        export const {addTocart,removeFromCart}  =  AddcartSlice.actions
+        export const {addTocart,removeFromCart,clearCart,updateQuantity, setDeliveryDate}  =  AddcartSlice.actions
         export default AddcartSlice.reducer 
             
